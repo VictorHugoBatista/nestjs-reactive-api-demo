@@ -1,23 +1,13 @@
-import { map } from 'rxjs/operators';
 import { Controller, Get, Param } from '@nestjs/common';
 
-import { PostService } from '../services/post.service';
+import { GetPostReactiveCommand } from '../commands/get-post-reactive.command';
 
 @Controller('post')
 export class PostController {
-  constructor(private postService: PostService) {}
+  constructor(private reactiveCommand: GetPostReactiveCommand) {}
 
-  @Get('/:id')
-  public get(@Param('id') id: number) {
-    const postObservable$ = this.postService.getComplete(id);
-
-    return postObservable$.pipe(
-      map((postComplete) => {
-        return {
-          ...postComplete.postDetailObservable$.data,
-          comments: postComplete.postComentsObservable$.data,
-        };
-      }),
-    );
+  @Get('/:postId/reactive')
+  public get(@Param('postId') postId: number) {
+    return this.reactiveCommand.execute(postId);
   }
 }
