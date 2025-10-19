@@ -8,7 +8,7 @@ import { PostReactiveService } from '../services/post-reactive.service';
 export class GetPostReactiveCommand {
   constructor(private postService: PostReactiveService) {}
 
-  execute(postId: number) {
+  public execute(postId: number) {
     const postDetailObservable$ = this.postService.getPostDetail(postId);
     const postComentsObservable$ = this.postService.getPostComents(postId).pipe(
       map((comments) => {
