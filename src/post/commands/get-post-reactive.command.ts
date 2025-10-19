@@ -17,15 +17,15 @@ export class GetPostReactiveCommand {
     );
 
     const postCompleteObservable$ = combineLatest({
-      postDetailObservable$,
-      postComentsObservable$,
+      post: postDetailObservable$,
+      comments: postComentsObservable$,
     });
 
     return postCompleteObservable$.pipe(
       map((postComplete) => {
         return {
-          ...postComplete.postDetailObservable$.data,
-          comments: postComplete.postComentsObservable$.data,
+          ...postComplete.post.data,
+          comments: postComplete.comments.data,
         };
       }),
     );

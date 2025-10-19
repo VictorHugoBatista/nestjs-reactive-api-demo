@@ -16,7 +16,7 @@ export class PostController {
   }
 
   @Get('/:postId/sync')
-  public getSync(@Param('postId') postId: number) {
-    return this.syncCommand.execute(postId);
+  public async getSync(@Param('postId') postId: number) {
+    return await this.syncCommand.execute(postId);
   }
 }
