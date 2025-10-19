@@ -7,7 +7,9 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('NestJS Reactive API Demo')
-    .setDescription('Demo for consuming different api endpoints at same time and return them combined')
+    .setDescription(
+      'Demo for consuming different api endpoints at same time and return them combined. Compare two endpoints getting the same API resource, ony with RXJS and another with the traditional way',
+    )
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, documentFactory);
